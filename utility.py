@@ -26,9 +26,10 @@ def fetch_unread_emails(service, max_results=10):
     return messages
 
 
-def add_label(service, message_id, label_name="Action"):
+def add_label(service, message_id, label_name):
     # Check if label exists, create if not
-    print("Moving to action folder")
+    print("Moving to " + label_name + "folder")
+    remove_from_inbox(service, message_id)
     labels = service.users().labels().list(userId='me').execute()
     label_id = None
     for label in labels['labels']:
@@ -47,4 +48,23 @@ def add_label(service, message_id, label_name="Action"):
         userId='me',
         id=message_id,
         body={"addLabelIds": [label_id]}
+    ).execute()
+
+
+def remove_from_inbox(service, message_id):
+    service.users().messages().modify(
+        userId="me",
+        id=message_id,
+        body={
+            "removeLabelIds": ["INBOX"]
+        }
+    ).execute()
+
+def mark_as_read(service, message_id):
+    service.users().messages().modify(
+        userId="me",
+        id=message_id,
+        body={
+            "removeLabelIds": ["UNREAD"]
+        }
     ).execute()
