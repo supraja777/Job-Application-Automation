@@ -11,6 +11,6 @@ if __name__ == '__main__':
     else:
         for msg in messages:
             print("Number of messages processed ", email_cnt + 1)
-            cnt += 1
+            email_cnt += 1
             email_details = get_email_details(service, msg['id'])
             determine_action_needed(email_details, service)
