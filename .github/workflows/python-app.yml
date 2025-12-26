@@ -28,6 +28,8 @@ jobs:
 
       - name: Write Gmail credentials
         run: echo '${{ secrets.GMAIL_CREDENTIALS }}' > credentials.json
+      - name: Write Gmail token
+        run: echo '${{ secrets.GMAIL_TOKEN }}' > token.json
 
       - run: python main.py
 
