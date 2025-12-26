@@ -21,7 +21,7 @@ class Acknowledgment(BaseModel):
     is_application_acknowledgment: bool = Field(..., description = "True if email is an application acknowledgment False if not")
 
 class ApplicationInformation(BaseModel):
-       Date: str = Field(..., description="Date applied")
+       date: str = Field(..., description="Date applied")
        company: str = Field(..., description = "Company name to which the job is applied to, example - Oracle, Google"),
        role: str = Field(..., description = "Job role applied to, example - AI/ML Systems Research Intern"),
        job_id_or_link: str = Field(..., description="Job link"),
@@ -104,6 +104,7 @@ application_acknowledgment_chain = application_acknowledgment_template | llm.wit
 extract_application_information_chain = extract_application_information_template | llm.with_structured_output(ApplicationInformation)
 
 def is_action_needed(email_details, service):
+    print("IN ACTION NEEDED")
     input_data = {"email_snippet" : email_details}
     isActionNeeded = determine_action_chain.invoke(input_data).action_needed
     print(isActionNeeded)

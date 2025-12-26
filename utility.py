@@ -29,7 +29,6 @@ def fetch_unread_emails(service, max_results=5):
 def add_label(service, message_id, label_name):
     # Check if label exists, create if not
     print("Moving to " + label_name + "folder")
-    remove_from_inbox(service, message_id)
     labels = service.users().labels().list(userId='me').execute()
     label_id = None
     for label in labels['labels']:
