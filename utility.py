@@ -28,6 +28,7 @@ def fetch_unread_emails(service, max_results=10):
 
 def add_label(service, message_id, label_name="Action"):
     # Check if label exists, create if not
+    print("Moving to action folder")
     labels = service.users().labels().list(userId='me').execute()
     label_id = None
     for label in labels['labels']:
