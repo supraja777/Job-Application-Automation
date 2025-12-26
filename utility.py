@@ -18,7 +18,7 @@ def get_email_details(service, message_id):
 
 
 
-def fetch_unread_emails(service, max_results=10):
+def fetch_unread_emails(service, max_results=5):
     # Query: unread emails
     results = service.users().messages().list(
         userId='me', q='is:unread', maxResults=max_results).execute()
