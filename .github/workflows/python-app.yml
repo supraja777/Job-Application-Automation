@@ -11,6 +11,8 @@ on:
 
 permissions:
   contents: read
+env: 
+  GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
 
 jobs:
   run:
